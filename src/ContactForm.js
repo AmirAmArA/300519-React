@@ -24,10 +24,15 @@ export default class ContactForm extends Component {
   onSubmit(e) {
     console.log(this.state);
     e.preventDefault();
-    this.state.map(key => {
-      console.log(key);
-      validator(key.value, key.name, key.validations);
-    });
+    for(let key in this.state){
+      this.setState({
+        [key]: {
+          ...this.state[key],
+          ...validator(this.state[key].value, this.state[key].name, this.state[key].validations)
+        }
+      })
+    }
+    
   }
   render() {
     return (
